@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Churn Analytics{% endblock %} - Customer Churn Analytics</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand">Churn Analytics<small>Customer retention insights</small></div>
+    <nav class="nav" aria-label="Main">
+      {% set links = [('dashboard','Dashboard','dashboard'),('analysis','Customer analysis','analysis'),
+                      ('prediction','Churn prediction','prediction'),('customers','Risk customers','customers'),
+                      ('performance','Model performance','performance'),('insights','Business insights','insights_page'),
+                      ('about','About project','about')] %}
+      {% for key, label, endpoint in links %}
+        <a href="{{ url_for(endpoint) }}" class="{{ 'active' if active == key }}" {% if active == key %}aria-current="page"{% endif %}>{{ label }}</a>
+      {% endfor %}
+    </nav>
+    <div class="side-foot">Model: {{ model_name }}<br>Data: {{ 'IBM Telco (public)' if data_source == 'ibm-telco' else 'Synthetic demo' }}</div>
+  </aside>
+  <main class="main">
+    {% if data_source != 'ibm-telco' %}<div class="banner">This app is running on <strong>synthetic sample data</strong>, not real customers. Numbers are for demonstration only.</div>{% endif %}
+    {% block content %}{% endblock %}
+  </main>
+</div>
+<script src="{{ url_for('static', filename='js/chart.umd.js') }}"></script>
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

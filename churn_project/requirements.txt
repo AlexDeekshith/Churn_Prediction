@@ -1,0 +1,14 @@
+# Core
+Flask>=3.0
+pandas>=2.2
+numpy>=1.26
+scikit-learn>=1.4
+joblib>=1.3
+# EDA notebook
+matplotlib>=3.8
+seaborn>=0.13
+jupyter>=1.0
+# Tests
+pytest>=8.0
+# Optional: if installed, XGBoost is trained and compared automatically
+# xgboost>=2.0

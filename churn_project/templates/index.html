@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block content %}
+{% if error_404 %}<div class="alert-err">That page does not exist. Use the menu to continue.</div>{% endif %}
+<div class="page-head"><div><h1>About this project</h1><p>A customer churn prediction and analytics system built as a data analytics and machine learning internship project.</p></div></div>
+<div class="two-col">
+  <section class="card"><h2>What it does</h2>
+    <p>Telecom companies lose revenue when customers leave. This system estimates each customer's probability of churning, shows why, and lets analysts explore the patterns behind churn so retention teams can act early.</p>
+    <p>Analysts can explore customer data, compare models, enter a new customer to get a churn probability with the main contributing factors, and review the customers most at risk.</p>
+    <h2 style="margin-top:1rem">Pipeline</h2>
+    <div class="pipeline"><span>Raw data</span><span>Cleaning</span><span>Missing values</span><span>EDA</span><span>Feature engineering</span><span>Encoding and scaling</span><span>Train/test split</span><span>Model training</span><span>Evaluation</span><span>Selection</span><span>Saved model</span><span>API</span><span>Web app</span></div>
+    <p class="small muted">Imputation, encoding and scaling live inside one scikit-learn Pipeline fitted on the training split only, so the same steps run at prediction time and nothing leaks from the test set.</p>
+  </section>
+  <section class="card"><h2>This installation</h2><div id="facts" class="small"></div>
+    <h2 style="margin-top:1rem">Limitations</h2>
+    <ul class="small">
+      <li>The public dataset is a single snapshot with no dates, so the model cannot learn seasonality or changes over time.</li>
+      <li>Explanations show associations learned by the model, not proven causes.</li>
+      <li>The “Likely to Churn” label uses a cutoff below 50% (tuned for F1 on training data) so more churners are caught; the probability itself is not re-weighted.</li>
+      <li>Risk bands are business rules and should be tuned to the retention budget.</li>
+    </ul>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}<script>
+api('/api/meta').then((m) => {
+  const rows = [['Dataset', m.dataset_source === 'ibm-telco' ? 'IBM Telco Customer Churn (public sample data)' : 'Synthetic demo data'],
+    ['Customers', int(m.n_rows)], ['Test set', int(m.n_test) + ' customers'], ['Selected model', m.model],
+    ['Selection rule', m.selection_rule], ['Trained', m.trained_at.replace('T', ' ') + ' UTC'],
+    ['Risk bands', `Low below ${pct(m.thresholds.low_max, 0)}, High from ${pct(m.thresholds.high_min, 0)}`],
+    ['Predictions stored', int(m.predictions_stored)], ['scikit-learn', m.versions.scikit_learn]];
+  document.getElementById('facts').innerHTML = '<table>' + rows.map(([k, v]) => `<tr><th>${k}</th><td>${esc(v)}</td></tr>`).join('') + '</table>';
+});
+</script>{% endblock %}

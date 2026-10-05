@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Model performance{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Model performance</h1><p id="sub">Metrics calculated on the held-out test set.</p></div></div>
+<div id="msg"></div>
+<section class="card"><h2>Model comparison</h2><div class="table-wrap"><table id="cmp"></table></div>
+  <p class="muted small" id="rule" style="margin-top:.6rem"></p></section>
+<div class="filters" style="margin-top:1rem"><label class="field">Show details for<select id="which"></select></label></div>
+<section class="grid cols-2">
+  <div class="card"><h3>Confusion matrix</h3><div id="cm"></div></div>
+  <div class="card"><div class="chart-box"><canvas id="c-roc"></canvas></div></div>
+  <div class="card"><div class="chart-box tall"><canvas id="c-imp"></canvas></div></div>
+  <div class="card"><h3>Classification report</h3><div class="table-wrap"><table id="report"></table></div></div>
+  <div class="card"><h3>Calibration check (selected model)</h3><p class="small muted">Does a predicted 40-50% really mean about 45% of those customers churned? Bands with few customers are noisy.</p><div class="table-wrap"><table id="cal"></table></div></div>
+</section>
+<p class="muted small" style="margin-top:1rem">Churn is the cost-sensitive class: a missed churner (false negative) usually costs more than a wasted retention offer (false positive), so recall and F1 matter more than accuracy here.</p>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/performance.js') }}"></script>{% endblock %}

@@ -1,0 +1,117 @@
+{
+  "selected_model": "Gradient Boosting",
+  "threshold": 0.32,
+  "dataset_source": "ibm-telco",
+  "trained_at": "2026-10-01T11:58:00+00:00",
+  "n_rows": 7043,
+  "n_train": 5634,
+  "n_test": 1409,
+  "churn_rate": 0.2653698707936959,
+  "random_state": 42,
+  "categories": {
+    "gender": [
+      "Female",
+      "Male"
+    ],
+    "Partner": [
+      "No",
+      "Yes"
+    ],
+    "Dependents": [
+      "No",
+      "Yes"
+    ],
+    "PhoneService": [
+      "No",
+      "Yes"
+    ],
+    "MultipleLines": [
+      "No",
+      "No phone service",
+      "Yes"
+    ],
+    "InternetService": [
+      "DSL",
+      "Fiber optic",
+      "No"
+    ],
+    "OnlineSecurity": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "OnlineBackup": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "DeviceProtection": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "TechSupport": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "StreamingTV": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "StreamingMovies": [
+      "No",
+      "No internet service",
+      "Yes"
+    ],
+    "Contract": [
+      "Month-to-month",
+      "One year",
+      "Two year"
+    ],
+    "PaperlessBilling": [
+      "No",
+      "Yes"
+    ],
+    "PaymentMethod": [
+      "Bank transfer (automatic)",
+      "Credit card (automatic)",
+      "Electronic check",
+      "Mailed check"
+    ]
+  },
+  "cleaning_report": {
+    "rows_raw": 7043,
+    "duplicate_ids_removed": 0,
+    "total_charges_missing": 11,
+    "filled_zero_for_new_customers": 11,
+    "rows_missing_target_dropped": 0,
+    "rows_clean": 7043
+  },
+  "outliers": {
+    "tenure": {
+      "lower_fence": -60.0,
+      "upper_fence": 124.0,
+      "n_outliers": 0,
+      "n_negative": 0
+    },
+    "MonthlyCharges": {
+      "lower_fence": -46.02,
+      "upper_fence": 171.38,
+      "n_outliers": 0,
+      "n_negative": 0
+    },
+    "TotalCharges": {
+      "lower_fence": -4683.52,
+      "upper_fence": 8868.67,
+      "n_outliers": 0,
+      "n_negative": 0
+    }
+  },
+  "versions": {
+    "python": "3.12.3",
+    "scikit_learn": "1.8.0"
+  },
+  "selection_rule": "highest 5-fold cross-validated F1 on the training split, at a cutoff tuned on that split (recall breaks ties)"
+}

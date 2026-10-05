@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><h1>Dashboard</h1><p>Churn across the whole customer base. Every chart updates with the filters.</p></div>
+</div>
+<form class="filters card" id="filters" aria-label="Dashboard filters">
+  <label class="field">Contract<select id="f-contract"><option value="">All</option></select></label>
+  <label class="field">Internet service<select id="f-internet"><option value="">All</option></select></label>
+  <label class="field">Gender<select id="f-gender"><option value="">All</option></select></label>
+  <label class="field">Senior citizen<select id="f-senior"><option value="">All</option><option value="1">Yes</option><option value="0">No</option></select></label>
+  <label class="field">Tenure from (months)<input type="number" id="f-tmin" min="0" step="1"></label>
+  <label class="field">Tenure to (months)<input type="number" id="f-tmax" min="0" step="1"></label>
+  <button type="button" class="btn ghost" id="reset">Reset filters</button>
+</form>
+<div id="msg"></div>
+<section class="grid kpis" id="kpis" aria-label="Key figures"></section>
+<section class="grid charts">
+  <div class="card"><div class="chart-box"><canvas id="c-dist"></canvas></div></div>
+  <div class="card"><div class="chart-box"><canvas id="c-contract"></canvas></div></div>
+  <div class="card"><div class="chart-box"><canvas id="c-tenure"></canvas></div></div>
+  <div class="card"><div class="chart-box"><canvas id="c-charges"></canvas></div></div>
+  <div class="card"><div class="chart-box"><canvas id="c-internet"></canvas></div></div>
+  <div class="card"><div class="chart-box"><canvas id="c-payment"></canvas></div></div>
+  <div class="card span-2"><div class="chart-box tall"><canvas id="c-demo"></canvas></div></div>
+</section>
+<p class="muted small" style="margin-top:1rem">High-risk customers are those whose model-estimated churn probability is at or above the high-risk threshold (a configurable business rule). Scores are out-of-fold predictions, so no customer is scored by a model that saw their own outcome.</p>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>{% endblock %}

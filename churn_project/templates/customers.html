@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Risk customers{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Risk customers</h1><p>Every customer with a model-estimated churn probability. High-risk rows are highlighted.</p></div></div>
+<div class="filters card">
+  <label class="field">Search customer ID<input type="search" id="search" placeholder="e.g. 7590-VHVEG" autocomplete="off"></label>
+  <label class="field">Low risk below<input type="number" id="low" min="0.01" max="0.98" step="0.01"></label>
+  <label class="field">High risk from<input type="number" id="high" min="0.02" max="0.99" step="0.01"></label>
+  <button class="btn ghost" type="button" id="apply">Apply thresholds</button>
+</div>
+<p class="muted small">Thresholds are business rules, not model outputs. The defaults come from configuration; change them here to see how many customers fall in each band.</p>
+<div id="msg"></div>
+<div class="chips" id="chips" role="group" aria-label="Filter by risk"></div>
+<div class="card"><div class="table-wrap"><table id="tbl"></table></div>
+  <div class="pager"><span class="muted small" id="count"></span><button class="btn ghost" id="prev">Previous</button><span id="pageinfo" class="small"></span><button class="btn ghost" id="next">Next</button></div></div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/customers.js') }}"></script>{% endblock %}

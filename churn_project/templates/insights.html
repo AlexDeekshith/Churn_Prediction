@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Business insights{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Business insights</h1><p>Patterns calculated from the customer data, followed by suggested actions.</p></div></div>
+<div id="msg"></div>
+<div class="two-col">
+  <section class="card"><h2>Data-driven findings</h2><p class="muted small">Calculated from <span id="n">...</span> customers. These are observed associations, not proof of cause.</p><div id="findings"></div></section>
+  <section class="card"><h2>Suggested business actions</h2><p class="muted small">Ideas for retention teams, triggered by the findings on the left. These are judgement calls, not model output. “Customers to target” counts high-risk customers in each group.</p><div id="actions"></div></section>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/insights.js') }}"></script>{% endblock %}

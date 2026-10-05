@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Customer analysis{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Customer analysis</h1><p>Compare churn across customer segments and see how churned and retained customers differ.</p></div></div>
+<div class="filters card">
+  <label class="field">Compare churn by
+    <select id="by">{% for key, label in dimensions.items() %}<option value="{{ key }}">{{ label }}</option>{% endfor %}</select>
+  </label>
+</div>
+<div id="msg"></div>
+<section class="grid charts">
+  <div class="card"><div class="chart-box"><canvas id="c-seg"></canvas></div></div>
+  <div class="card"><h3 id="seg-title">Segments</h3><div class="table-wrap"><table id="seg-table"></table></div></div>
+  <div class="card"><div class="chart-box"><canvas id="c-ten"></canvas></div></div>
+  <div class="card"><div class="chart-box"><canvas id="c-chg"></canvas></div></div>
+  <div class="card span-2"><h3>Churned vs retained customers</h3><div class="table-wrap"><table id="profile"></table></div></div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/analysis.js') }}"></script>{% endblock %}

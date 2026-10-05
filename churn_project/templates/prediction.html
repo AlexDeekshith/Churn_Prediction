@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Churn prediction{% endblock %}
+{% block content %}
+<div class="page-head"><div><h1>Churn prediction</h1><p>Enter a customer's details to estimate how likely they are to leave. The probability comes from the trained model.</p></div>
+  <div><button type="button" class="btn ghost" id="ex-high">Load higher-risk example</button> <button type="button" class="btn ghost" id="ex-low">Load lower-risk example</button></div></div>
+<div class="predict-layout">
+  <form id="form" novalidate>
+    <div id="form-body"></div>
+    <button class="btn" type="submit" id="submit">Predict churn</button>
+  </form>
+  <aside class="result card" id="result" aria-live="polite">
+    <div class="empty">Fill in the form and choose <strong>Predict churn</strong> to see the result.</div>
+  </aside>
+</div>
+<section class="card" style="margin-top:1.25rem"><h2>Recent predictions</h2>
+  <div class="table-wrap"><table id="history"></table></div></section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/prediction.js') }}"></script>{% endblock %}
